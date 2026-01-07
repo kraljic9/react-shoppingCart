@@ -19,9 +19,24 @@ function ShoppingCart() {
     { id: 3, text: "Pants", price: 30 },
   ];
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([{ id: 1, text: "T-shirt", quantity: 1 }]);
 
-  return <></>;
+  return (
+    <>
+      <h1>Shopping Cart</h1>
+
+      <ul>
+        {cart.map((item) => (
+          <li key={item.id}>
+            <span className="item-text">{item.text}</span>
+            <span className="item-quantity">{item.quantity}</span>
+            <button className="increase">Increase</button>
+            <button className="decrease">Decrease</button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 export default ShoppingCart;
