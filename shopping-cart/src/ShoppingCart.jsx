@@ -1,9 +1,9 @@
 /*
 
-Products
-Cart
+Products OK!
+Cart OK!
 
-add
+add 
 increase
 decrease
 remove at 0
@@ -19,7 +19,23 @@ function ShoppingCart() {
     { id: 3, text: "Pants", price: 30 },
   ];
 
-  const [cart, setCart] = useState([{ id: 1, text: "T-shirt", quantity: 1 }]);
+  const [cart, setCart] = useState([{ id: 1, quantity: 1 }]);
+
+  function addToCart(id) {
+    setCart((prev) => {
+      let existingItem = prev.find((item) => item.id === id);
+
+      if (existingItem) {
+        return prev.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+
+      return [...prev, { id, quantity: 1 }];
+    });
+  }
+
+  console.log(cart);
 
   return (
     <>
@@ -28,7 +44,7 @@ function ShoppingCart() {
       <ul>
         {cart.map((item) => (
           <li key={item.id}>
-            <span className="item-text">{item.text}</span>
+            <span className="item-text">{item.id}</span>
             <span className="item-quantity">{item.quantity}</span>
             <button className="increase">Increase</button>
             <button className="decrease">Decrease</button>
@@ -43,7 +59,7 @@ function ShoppingCart() {
             <li key={item.id}>
               <span>{item.text}</span>
               <span> ${item.price}</span>
-              <button>Add to cart</button>
+              <button onClick={() => addToCart(item.id)}>Add to cart</button>
             </li>
           );
         })}
