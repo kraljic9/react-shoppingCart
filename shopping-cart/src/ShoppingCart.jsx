@@ -35,6 +35,19 @@ function ShoppingCart() {
           </li>
         ))}
       </ul>
+
+      <h3>Shopping products</h3>
+      <ul>
+        {products.map((item) => {
+          return (
+            <li key={item.id}>
+              <span>{item.text}</span>
+              <span> ${item.price}</span>
+              <button>Add to cart</button>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 }
