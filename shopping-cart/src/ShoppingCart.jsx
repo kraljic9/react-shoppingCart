@@ -19,7 +19,13 @@ function ShoppingCart() {
     { id: 3, text: "Pants", price: 30 },
   ];
 
-  const [cart, setCart] = useState([{ text: "T-shirt", id: 1, quantity: 1 }]);
+  const [cart, setCart] = useState([]);
+
+  const [display, setDisplay] = useState("");
+
+  function toggleCart() {
+    setDisplay(display === "none" ? "flex" : "none");
+  }
 
   function addToCart(id, text) {
     setCart((prev) => {
@@ -67,38 +73,60 @@ function ShoppingCart() {
 
   return (
     <>
-      <button className="shopping-cart-button">🛒</button>
+      <button className="shopping-cart-button" onClick={toggleCart}>
+        🛒
+      </button>
 
-      <ul>
-        {cart.map((item) => (
-          <li key={item.id}>
-            <span>{item.text}</span>
-            <span className="item-quantity">{item.quantity}</span>
-            <button className="increase" onClick={() => increase(item.id)}>
-              Increase
-            </button>
-            <button className="decrease" onClick={() => decrease(item.id)}>
-              Decrease
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="cart-list-wrapper" style={{ display: display }}>
+        <ul className="cart-list">
+          {cart.map((item) => (
+            <li key={item.id} className="cart-list-item">
+              <div className="cart-item-txt">
+                <span>{item.text}</span>
+                <span className="item-quantity">{item.quantity}</span>
+              </div>
 
-      <p>Total: ${totalPrice}</p>
-      <h3>Shopping products</h3>
-      <ul>
-        {products.map((item) => {
-          return (
-            <li key={item.id}>
-              <span>{item.text}</span>
-              <span> ${item.price}</span>
-              <button onClick={() => addToCart(item.id, item.text)}>
-                Add to cart
-              </button>
+              <div className="cart-item-btn">
+                <button
+                  className="increase-btn"
+                  onClick={() => increase(item.id)}
+                >
+                  Increase
+                </button>
+                <button
+                  className="decrease-btn"
+                  onClick={() => decrease(item.id)}
+                >
+                  Decrease
+                </button>
+              </div>
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+        <p className="total-price">Total: ${totalPrice}</p>
+      </div>
+
+      <h3 className="shopping-title">Shopping products</h3>
+      <div className="products-list-wrapper">
+        <ul className="products-list">
+          {products.map((item) => {
+            return (
+              <li key={item.id} className="products-list-item">
+                <div className="products-txt">
+                  <span>{item.text}:</span>
+                  <span> ${item.price}</span>
+                </div>
+                <button
+                  className="addToCart-btn"
+                  onClick={() => addToCart(item.id, item.text)}
+                >
+                  Add to cart
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
 }
