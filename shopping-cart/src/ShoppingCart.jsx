@@ -3,8 +3,8 @@
 Products OK!
 Cart OK!
 
-add 
-increase
+add OK!
+increase OK!
 decrease
 remove at 0
 total
@@ -35,7 +35,13 @@ function ShoppingCart() {
     });
   }
 
-  console.log(cart);
+  function increase(id) {
+    setCart((prev) =>
+      prev.map((item) =>
+        id === item.id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  }
 
   return (
     <>
@@ -46,7 +52,9 @@ function ShoppingCart() {
           <li key={item.id}>
             <span className="item-text">{item.id}</span>
             <span className="item-quantity">{item.quantity}</span>
-            <button className="increase">Increase</button>
+            <button className="increase" onClick={() => increase(item.id)}>
+              Increase
+            </button>
             <button className="decrease">Decrease</button>
           </li>
         ))}
