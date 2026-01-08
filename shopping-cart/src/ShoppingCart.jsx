@@ -7,7 +7,7 @@ add OK!
 increase OK!
 decrease OK!
 remove at 0 OK!
-total
+total OK!
 */
 
 import { useState } from "react";
@@ -19,9 +19,9 @@ function ShoppingCart() {
     { id: 3, text: "Pants", price: 30 },
   ];
 
-  const [cart, setCart] = useState([{ id: 1, quantity: 1 }]);
+  const [cart, setCart] = useState([{ text: "T-shirt", id: 1, quantity: 1 }]);
 
-  function addToCart(id) {
+  function addToCart(id, text) {
     setCart((prev) => {
       let existingItem = prev.find((item) => item.id === id);
 
@@ -31,9 +31,10 @@ function ShoppingCart() {
         );
       }
 
-      return [...prev, { id, quantity: 1 }];
+      return [...prev, { text, id, quantity: 1 }];
     });
   }
+  console.log(cart);
 
   function increase(id) {
     setCart((prev) =>
@@ -66,27 +67,24 @@ function ShoppingCart() {
 
   return (
     <>
-      <h1>Shopping Cart</h1>
+      <button className="shopping-cart-button">🛒</button>
 
       <ul>
         {cart.map((item) => (
-          <>
-            <li key={item.id}>
-              <span className="item-text">{item.id}</span>
-              <span className="item-quantity">{item.quantity}</span>
-              <button className="increase" onClick={() => increase(item.id)}>
-                Increase
-              </button>
-              <button className="decrease" onClick={() => decrease(item.id)}>
-                Decrease
-              </button>
-            </li>
-          </>
+          <li key={item.id}>
+            <span>{item.text}</span>
+            <span className="item-quantity">{item.quantity}</span>
+            <button className="increase" onClick={() => increase(item.id)}>
+              Increase
+            </button>
+            <button className="decrease" onClick={() => decrease(item.id)}>
+              Decrease
+            </button>
+          </li>
         ))}
       </ul>
 
       <p>Total: ${totalPrice}</p>
-
       <h3>Shopping products</h3>
       <ul>
         {products.map((item) => {
@@ -94,7 +92,9 @@ function ShoppingCart() {
             <li key={item.id}>
               <span>{item.text}</span>
               <span> ${item.price}</span>
-              <button onClick={() => addToCart(item.id)}>Add to cart</button>
+              <button onClick={() => addToCart(item.id, item.text)}>
+                Add to cart
+              </button>
             </li>
           );
         })}
