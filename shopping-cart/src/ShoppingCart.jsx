@@ -43,6 +43,22 @@ function ShoppingCart() {
     );
   }
 
+  function decrease(id) {
+    setCart((prev) => {
+      let existingItem = prev.find((item) => item.id === id);
+
+      if (existingItem.quantity > 1) {
+        return prev.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        );
+      }
+
+      if (existingItem.quantity === 1) {
+        return prev.filter((item) => item.id !== id);
+      }
+    });
+  }
+
   return (
     <>
       <h1>Shopping Cart</h1>
@@ -55,7 +71,9 @@ function ShoppingCart() {
             <button className="increase" onClick={() => increase(item.id)}>
               Increase
             </button>
-            <button className="decrease">Decrease</button>
+            <button className="decrease" onClick={() => decrease(item.id)}>
+              Decrease
+            </button>
           </li>
         ))}
       </ul>
