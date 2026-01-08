@@ -1,0 +1,150 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 1320px;
+}
+
+.shopping-cart-button {
+  font-size: 1.3rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: hsl(240, 100%, 60%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 10px;
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+
+.cart-list-wrapper {
+  border: 2px solid black;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  right: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  background-color: hsl(240, 100%, 60%);
+  border-radius: 10px;
+  top: 15px;
+  justify-content: space-between;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+}
+
+.cart-list-item {
+  background-color: hsl(0, 0%, 70%);
+  padding: 8px;
+  margin: 10px;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.cart-item-txt {
+  text-align: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cart-item-btn {
+  display: flex;
+  gap: 10px;
+}
+
+.item-quantity {
+  font-weight: bold;
+}
+
+.increase-btn {
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  background-color: hsl(240, 100%, 60%);
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.increase-btn:hover {
+  background-color: hsl(240, 100%, 50%);
+}
+
+.decrease-btn {
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+  background-color: hsl(0, 0%, 100%);
+}
+
+.decrease-btn:hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+.products-list-wrapper {
+  margin-top: 10px;
+  width: 800px;
+}
+
+.total-price {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.shopping-title {
+  font-size: 1.5rem;
+  margin: 10px;
+  text-align: center;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 20px;
+}
+
+.products-list-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  width: 200px;
+  height: 150px;
+  justify-content: end;
+  padding: 12px;
+}
+
+.products-txt {
+  display: flex;
+  font-weight: bold;
+}
+
+.addToCart-btn {
+  background-color: hsl(240, 100%, 60%);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.addToCart-btn:hover {
+  background-color: hsl(240, 100%, 50%);
+}
