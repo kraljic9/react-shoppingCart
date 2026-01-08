@@ -5,8 +5,8 @@ Cart OK!
 
 add OK!
 increase OK!
-decrease
-remove at 0
+decrease OK!
+remove at 0 OK!
 total
 */
 
@@ -59,24 +59,33 @@ function ShoppingCart() {
     });
   }
 
+  let totalPrice = cart.reduce((sum, cur) => {
+    let product = products.find((item) => item.id === cur.id);
+    return sum + product.price * cur.quantity;
+  }, 0);
+
   return (
     <>
       <h1>Shopping Cart</h1>
 
       <ul>
         {cart.map((item) => (
-          <li key={item.id}>
-            <span className="item-text">{item.id}</span>
-            <span className="item-quantity">{item.quantity}</span>
-            <button className="increase" onClick={() => increase(item.id)}>
-              Increase
-            </button>
-            <button className="decrease" onClick={() => decrease(item.id)}>
-              Decrease
-            </button>
-          </li>
+          <>
+            <li key={item.id}>
+              <span className="item-text">{item.id}</span>
+              <span className="item-quantity">{item.quantity}</span>
+              <button className="increase" onClick={() => increase(item.id)}>
+                Increase
+              </button>
+              <button className="decrease" onClick={() => decrease(item.id)}>
+                Decrease
+              </button>
+            </li>
+          </>
         ))}
       </ul>
+
+      <p>Total: ${totalPrice}</p>
 
       <h3>Shopping products</h3>
       <ul>
