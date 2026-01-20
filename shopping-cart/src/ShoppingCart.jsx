@@ -10,7 +10,7 @@ remove at 0 OK!
 total OK!
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ShoppingCart() {
   const products = [
@@ -19,9 +19,17 @@ function ShoppingCart() {
     { id: 3, text: "Pants", price: 30 },
   ];
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const [display, setDisplay] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   function toggleCart() {
     setDisplay(display === "none" ? "flex" : "none");
@@ -33,7 +41,7 @@ function ShoppingCart() {
 
       if (existingItem) {
         return prev.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
         );
       }
 
@@ -45,8 +53,8 @@ function ShoppingCart() {
   function increase(id) {
     setCart((prev) =>
       prev.map((item) =>
-        id === item.id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+        id === item.id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
     );
   }
 
@@ -56,7 +64,7 @@ function ShoppingCart() {
 
       if (existingItem.quantity > 1) {
         return prev.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
         );
       }
 
